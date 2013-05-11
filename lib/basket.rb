@@ -13,31 +13,22 @@ class Basket
 	end
 
 	def total
-		#item promotions must be calculated before the total is added up
-		apply_item_promotions
-		#add up the prices
+		@total_price = 0.00
 		contents.each do |i|
 			@total_price += i.price.to_f
 		end
-		#finally apply any basket promotions
-		apply_basket_promotions
-		return total_price.round(2)
+		apply_promotions
+		total_price.round(2)
 	end
 
 	def item_count
-		return contents.length
+		contents.length
 	end
 
-	def apply_item_promotions
+	def apply_promotions
     @promotional_rules.each do |pr|
-      pr.apply(self) if pr.is_a? ItemPromotion
+      pr.apply(self)
     end
-	end
-
-	def apply_basket_promotions
-    @promotional_rules.each do |pr|
-      pr.apply(self) if pr.is_a? BasketPromotion
-    end		
 	end
 
 end

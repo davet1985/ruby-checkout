@@ -36,6 +36,22 @@ describe Basket do
 			item = Item.new("001", "Travel Card Holder", 9.25)
 			@basket.add_item(item)
 			@basket.total.must_equal(9.25)
+			@basket.add_item(item)
+			@basket.total.must_equal(17)
+
+			basket = Basket.new(@promotional_rules)
+			basket.add_item(item)
+			basket.total.must_equal(9.25)
+		end
+
+		it "should return 9.25" do
+			item = Item.new("001", "Travel Card Holder", 9.25)
+			@basket.add_item(item)
+			@basket.total.must_equal(9.25)
+			@basket.add_item(item)
+			@basket.add_item(Item.new("007", "James Bond", 1))
+			@basket.total.must_equal(18)
+
 		end
 	end
 
